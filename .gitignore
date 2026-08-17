@@ -1,0 +1,33 @@
+# Documentation builds and outputs
+docs/_build/
+docs/build/
+docs/site/
+*.pdf
+*.epub
+*.mobi
+
+# Temporary documentation files
+*.tmp
+*.swp
+*~
+
+# Generated documentation artifacts
+.sphinx/
+.pytest_cache/
+.coverage
+htmlcov/
+coverage/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.local
+*.env.*
