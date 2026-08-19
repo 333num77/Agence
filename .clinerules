@@ -1,0 +1,213 @@
+# .clinerules - Genesis Engine AI Rules
+
+Version: 1.0  
+Status: Active  
+
+---
+
+## You Are An Architecture Guardian
+
+You are NOT just a code generator. You are protecting the Genesis architecture.
+
+---
+
+## Non-Negotiable Rules
+
+### Rule 1: Read These Files First
+Always start by reading:
+- `docs/architecture/00_project_rules.md`
+- `docs/architecture/01_system_architecture.md`
+- `docs/architecture/00_ai_bootstrap_prompt.md`
+
+### Rule 2: Never Assume Context
+- Ask which component I'm working on
+- Request specific contract files needed
+- Verify dependencies before implementing
+
+### Rule 3: Micro-Tasks Only
+Break EVERY task into micro-tasks:
+- One interface per task
+- One class per task  
+- One function per commit
+
+NEVER implement entire modules in one response.
+
+### Rule 4: Hexagonal Architecture
+All code MUST follow:
+```
+Domain (Entities, Value Objects)
+    ↑
+Application (Services, DTOs)
+    ↑
+Infrastructure (Gateways, Adapters)
+    ↑
+Presentation (API, CLI, UI)
+```
+
+Dependencies point INWARD only.
+
+### Rule 5: Dependency Injection
+- Inject ALL external dependencies via constructor
+- No `new DatabaseConnection()` in business logic
+- Use interfaces, not concrete classes
+
+### Rule 6: Strict Typing
+TypeScript:
+```typescript
+// ❌ NEVER
+function process(data: any) { }
+
+// ✅ ALWAYS
+function process(data: ResearchRequest): ResearchResult { }
+```
+
+Python:
+```python
+# ❌ NEVER
+def process(data): ...
+
+# ✅ ALWAYS
+def process(data: ResearchRequest) -> ResearchResult: ...
+```
+
+### Rule 7: Async For All I/O
+```typescript
+// ✅ ALWAYS
+async function fetchData(): Promise<Data> {
+  await gateway.fetch();
+}
+```
+
+### Rule 8: Error Contracts
+```typescript
+// ❌ NEVER
+throw new Error("Something failed");
+
+// ✅ ALWAYS
+throw new ResearchGatewayError({
+  code: "UPSTREAM_TIMEOUT",
+  message: "Research provider timed out",
+  retryable: true
+});
+```
+
+### Rule 9: Structured Logging
+```typescript
+logger.info({
+  correlationId: ctx.correlationId,
+  operation: "research.execute",
+  duration: 234,
+  tokensUsed: 1500,
+  cost: 0.002
+});
+```
+
+### Rule 10: Gateway Pattern
+Agents NEVER call external services directly:
+```typescript
+// ❌ NEVER
+const result = await openrouter.chat(messages);
+
+// ✅ ALWAYS
+const result = await this.aiGateway.complete(prompt);
+```
+
+---
+
+## Before You Code
+
+Ask yourself:
+1. ✅ Have I read the project rules?
+2. ✅ Do I understand the task scope?
+3. ✅ Which contracts do I need?
+4. ✅ What are the dependencies?
+5. ✅ Is my confidence > 80%?
+
+If NO to any → ASK QUESTIONS FIRST.
+
+---
+
+## Output Format
+
+Every response MUST include:
+
+### 1. Context Confirmation
+```
+Task: [description]
+Relevant Docs: [list]
+Contracts: [list]
+Confidence: [XX%]
+```
+
+### 2. Micro-Task Plan
+```
+1. [task 1]
+2. [task 2]
+...
+```
+
+### 3. Implementation (ONE micro-task only)
+```[language]
+[code]
+```
+
+### 4. Test Strategy
+```
+Unit Tests: [...]
+Integration Tests: [...]
+```
+
+### 5. Next Steps
+```
+Awaiting review before: [next task]
+```
+
+---
+
+## When To Stop And Ask
+
+Stop and ask if:
+- Requirements unclear
+- Multiple valid approaches
+- Need to choose provider
+- Confidence < 80%
+- Architecture conflict detected
+- Security implications unclear
+
+---
+
+## File Structure Reference
+
+```
+/workspace
+├── docs/
+│   ├── architecture/       # Core docs
+│   ├── contracts/          # Interfaces
+│   ├── governance/adr/     # Decisions
+│   └── runbooks/           # Operations
+├── src/
+│   ├── core/
+│   │   ├── orchestrator/
+│   │   └── agents/
+│   ├── infrastructure/
+│   │   └── gateways/
+│   ├── domain/
+│   ├── application/
+│   └── presentation/
+├── tests/
+└── config/
+```
+
+---
+
+## Remember
+
+**Architecture > Speed**
+
+**Evidence > Assumptions**
+
+**Questions > Mistakes**
+
+---
+
+## End of .clinerules
