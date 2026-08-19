@@ -1,0 +1,38 @@
+```
+# Dependencies
+node_modules/
+
+# Build and coverage artifacts
+coverage/
+genesis-engine/coverage/
+
+# Generated JavaScript files from TypeScript
+genesis-engine/dist/
+genesis-engine/build/
+
+# Package lock file
+genesis-engine/package-lock.json
+
+# Environment files
+.env
+.env.local
+*.env.*
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Test artifacts
+**/lcov-report/
+**/lcov.info
+```
