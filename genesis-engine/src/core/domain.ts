@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { EntityId } from '../interfaces/core.interfaces';
 
 // ============================================================================
 // VALUE OBJECTS (Immutable, validated domain primitives)
@@ -134,11 +135,14 @@ export class CostVO {
 /**
  * Base entity identifier
  */
-export class EntityIdVO {
+export class EntityIdVO implements EntityId {
+  public readonly createdAt: Date;
+  
   protected constructor(public readonly value: string) {
     if (!value || value.trim().length === 0) {
       throw new Error('EntityId cannot be empty');
     }
+    this.createdAt = new Date();
   }
 
   static create(): EntityIdVO {
@@ -211,6 +215,8 @@ export type ProjectStatus =
   | 'cancelled';
 
 export class Project implements IProject {
+  public readonly version: number;
+  
   constructor(
     public readonly id: ProjectIdVO,
     public name: string,
@@ -219,8 +225,10 @@ export class Project implements IProject {
     public readonly createdAt: Date,
     public updatedAt: Date,
     public readonly userId: string,
-    public metadata: Record<string, any> = {}
+    public metadata: Record<string, any> = {},
+    version: number = 1
   ) {
+    this.version = version;
     this.validate();
   }
 
