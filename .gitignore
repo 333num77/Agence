@@ -1,33 +1,28 @@
-# Documentation builds and outputs
-docs/_build/
-docs/build/
-docs/site/
-*.pdf
-*.epub
-*.mobi
+```
+# Dependencies
+node_modules/
 
-# Temporary documentation files
-*.tmp
-*.swp
-*~
-
-# Generated documentation artifacts
-.sphinx/
-.pytest_cache/
-.coverage
-htmlcov/
-coverage/
-
-# IDE and editor files
-.vscode/
-.idea/
-*.log
-
-# System files
-.DS_Store
-Thumbs.db
-
-# Environment files
+# Environment
 .env
 .env.local
 *.env.*
+
+# Logs and temp files
+*.log
+*.tmp
+
+# Editors
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+.venv/
+.env
+.env.local
+```
