@@ -14,7 +14,7 @@ class Researcher(Agent):
         def emit(msg, level="info", detail=None):
             events.emit(job_id, stage, self.name, msg, level, detail)
 
-        emit("Planning research queries.", level="action")
+        emit("Planning research queries…", level="action")
         plan = with_retry(job_id, stage, self.name, "Query planning",
                           lambda: llm.chat(job_id, stage, self.name, self.system_prompt(),
                                            f"{self.user_context()}\n\nIDEA:\n{idea}"))

@@ -32,7 +32,7 @@ class PromptIn(BaseModel):
 def start_validation(body: IdeaIn):
     idea = (body.idea or "").strip()
     if len(idea) < 12:
-        raise HTTPException(400, "Idea is too short (min 12 characters) - describe the problem and your solution in one line.")
+        raise HTTPException(400, "Idea is too short (min 12 characters) — describe the problem and your solution in one line.")
     job_id = orchestrator.start_job(idea)
     return {"job_id": job_id, "mode": config.MODE}
 
@@ -118,7 +118,7 @@ def put_prompt(name: str, body: PromptIn):
     if not path.exists():
         raise HTTPException(404, "Prompt not found")
     path.write_text(body.content, encoding="utf-8")
-    return {"saved": True, "note": "Applies to the next run - no restart needed"}
+    return {"saved": True, "note": "Applies to the next run — no restart needed"}
 
 
 @router.post("/stt")

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Genesis CLI shim - `python cli.py <command>` (same as the installed `genesis` command)."""
+"""Genesis CLI shim — `python cli.py <command>` (same as the installed `genesis` command)."""
 import sys
 from pathlib import Path
 

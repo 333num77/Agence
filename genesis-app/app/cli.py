@@ -1,4 +1,4 @@
-"""Genesis CLI - `genesis` command (or `python cli.py`).
+"""Genesis CLI — `genesis` command (or `python cli.py`).
 
 Commands:
   validate "IDEA"   Run a full validation (live events printed to terminal)
@@ -51,8 +51,8 @@ def cmd_validate(args: argparse.Namespace) -> int:
     db.init_db()
     job_id = orchestrator.start_job(idea)
     if not args.json:
-        print(f"{DIM}job {job_id} � mode {config.MODE.upper()} � "
-              f"llm {config.PROVIDER_NAME or 'unset'} � search {config.SEARCH_PROVIDER}{RESET}")
+        print(f"{DIM}job {job_id} · mode {config.MODE.upper()} · "
+              f"llm {config.PROVIDER_NAME or 'unset'} · search {config.SEARCH_PROVIDER}{RESET}")
 
     import time
     deadline = time.time() + args.timeout
@@ -79,7 +79,7 @@ def cmd_validate(args: argparse.Namespace) -> int:
                 _print_report(result)
             return 0
         time.sleep(0.25)
-    print("Timed out - job abhi bhi chal raha hai: genesis result " + job_id, file=sys.stderr)
+    print("Timed out — job abhi bhi chal raha hai: genesis result " + job_id, file=sys.stderr)
     return 8
 
 
@@ -200,7 +200,7 @@ def main(argv: list[str] | None = None) -> int:
     if hasattr(sys.stderr, "reconfigure"):
         sys.stderr.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(prog="genesis",
-                                     description="Genesis - AI idea validation engine")
+                                     description="Genesis — AI idea validation engine")
     parser.add_argument("--version", action="version",
                         version=f"genesis {__import__('app').__version__}")
     parser.add_argument("--no-color", action="store_true", help="disable ANSI colors")

@@ -1,4 +1,4 @@
-"""Genesis - AI-native idea validation engine (wedge v0.1)."""
+"""Genesis — AI-native idea validation engine (wedge v0.1)."""
 from pathlib import Path
 
 from fastapi import FastAPI

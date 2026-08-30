@@ -24,7 +24,7 @@ def _load_dotenv() -> None:
 
 _load_dotenv()
 
-# ?? LLM provider (OpenAI-compatible standard) ????????????????????????????????
+# ── LLM provider (OpenAI-compatible standard) ────────────────────────────────
 PROVIDER_PRESETS: dict[str, dict] = {
     "groq": {"base_url": "https://api.groq.com/openai/v1",
              "default_model": "llama-3.3-70b-versatile", "keyless": False},
@@ -71,7 +71,7 @@ def _resolve_provider() -> tuple[str, str, str, str]:
 
 PROVIDER_NAME, LLM_BASE_URL, LLM_API_KEY, LLM_MODEL = _resolve_provider()
 
-# ?? Fail-fast structural validation (actionable messages, at import) ?????????
+# ── Fail-fast structural validation (actionable messages, at import) ─────────
 _config_errors: list[str] = []
 if PROVIDER_NAME == "custom" and not LLM_BASE_URL:
     _config_errors.append("GENESIS_PROVIDER=custom requires LLM_BASE_URL")
@@ -90,7 +90,7 @@ if _config_errors:
 USE_NATIVE_JSON = LLM_JSON_MODE != "off"
 LLM_TIMEOUT = float(os.getenv("LLM_TIMEOUT", "90"))
 
-# ?? Search provider (tavily | searxng | mock) ????????????????????????????????
+# ── Search provider (tavily | searxng | mock) ────────────────────────────────
 SEARCH_PROVIDER = os.getenv("SEARCH_PROVIDER", "tavily").strip().lower()
 TAVILY_API_KEY = os.getenv("TAVILY_API_KEY", "").strip()
 TAVILY_BASE_URL = os.getenv("TAVILY_BASE_URL", "https://api.tavily.com/search").strip()
@@ -101,7 +101,7 @@ SEARCH_OK = (SEARCH_PROVIDER == "mock"
              or (SEARCH_PROVIDER == "tavily" and bool(TAVILY_API_KEY))
              or (SEARCH_PROVIDER == "searxng" and bool(SEARXNG_BASE)))
 
-# ?? Speech-to-text (optional feature; any /audio/transcriptions server) ?????
+# ── Speech-to-text (optional feature; any /audio/transcriptions server) ─────
 STT_API_KEY = os.getenv("STT_API_KEY", "").strip() or os.getenv("GROQ_API_KEY", "").strip()
 STT_BASE = os.getenv("STT_BASE_URL", "https://api.groq.com/openai/v1").strip().rstrip("/")
 STT_MODEL = os.getenv("STT_MODEL", "whisper-large-v3")
@@ -111,11 +111,11 @@ STT_ENABLED = {"auto": bool(STT_API_KEY) or "STT_BASE_URL" in os.environ,
 _stt_host = urlparse(STT_BASE).netloc or "unknown"
 STT_PROVIDER_LABEL = f"whisper@{_stt_host}" if "groq" in _stt_host else f"whisper-compat@{_stt_host}"
 
-# ?? Verdict thresholds ????????????????????????????????????????????????????????
+# ── Verdict thresholds ────────────────────────────────────────────────────────
 THRESHOLD_VALIDATE = int(os.getenv("THRESHOLD_VALIDATE", "70"))
 THRESHOLD_FIX_FIRST = int(os.getenv("THRESHOLD_FIX_FIRST", "45"))
 
-# ?? Global mode: live iff an endpoint exists AND (key present OR preset keyless)
+# ── Global mode: live iff an endpoint exists AND (key present OR preset keyless)
 _mode_env = os.getenv("GENESIS_MODE", "").strip().lower()
 _keyless_ok = PROVIDER_PRESETS.get(PROVIDER_NAME, {}).get("keyless", False)
 if _mode_env == "mock":

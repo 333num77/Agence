@@ -17,13 +17,13 @@ class Critic(Agent):
             events.emit(job_id, stage, self.name, msg, level, detail)
 
         compact = ev.compact_for_prompt(evidence)
-        emit("Red-teaming the idea.", level="action")
+        emit("Red-teaming the idea…", level="action")
 
         user_msg = (
             f"{self.user_context()}\n\nIDEA:\n{idea}\n\n"
             f"ANALYST SUMMARY:\n{json.dumps(analysis, ensure_ascii=False)}\n\n"
             f"EVIDENCE (cite by id):\n{json.dumps(compact, ensure_ascii=False)}\n\n"
-            "Produce the critique JSON. Be brutally honest - a saved failure is cheaper than a built failure."
+            "Produce the critique JSON. Be brutally honest — a saved failure is cheaper than a built failure."
         )
         out = with_retry(job_id, stage, self.name, "Critique",
                          lambda: llm.chat(job_id, stage, self.name, self.system_prompt(), user_msg))

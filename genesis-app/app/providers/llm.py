@@ -1,5 +1,5 @@
 """LLM provider: any OpenAI-compatible endpoint (Groq, OpenRouter, OpenAI,
-Ollama, vLLM, LM Studio, ...) via env presets - no vendor lock.
+Ollama, vLLM, LM Studio, ...) via env presets — no vendor lock.
 
 Retry taxonomy: transport errors / 429 (Retry-After honored) / 5xx are retried;
 4xx fails fast with the provider's own error surfaced. JSON-mode 'auto' falls
@@ -59,13 +59,13 @@ def chat(job_id: str, stage: str, agent: str, system: str, user: str,
             r = httpx.post(f"{config.LLM_BASE_URL}/chat/completions",
                            headers=headers, json=_payload(native),
                            timeout=config.LLM_TIMEOUT)
-            # Provider rejected native JSON mode ? reshape once, retry immediately
+            # Provider rejected native JSON mode → reshape once, retry immediately
             if (native and r.status_code in (400, 422) and "response_format"
                     in json.dumps(_payload(native))):
                 _native_json_disabled.set()
                 native = False
                 events.emit(job_id, stage, agent,
-                            "Provider rejected native JSON mode - falling back to "
+                            "Provider rejected native JSON mode — falling back to "
                             "prompt-only JSON (one-time, not counted as failure)",
                             level="warn")
                 continue
@@ -92,14 +92,14 @@ def chat(job_id: str, stage: str, agent: str, system: str, user: str,
             attempt += 1
             if attempt <= _RETRIES:
                 events.emit(job_id, stage, agent,
-                            f"LLM call failed (attempt {attempt}/{_RETRIES + 1}): {msg} - retrying",
+                            f"LLM call failed (attempt {attempt}/{_RETRIES + 1}): {msg} — retrying",
                             level="warn")
         except Exception as exc:  # transport errors, timeouts, JSON decode
             last_err = exc
             attempt += 1
             if attempt <= _RETRIES:
                 events.emit(job_id, stage, agent,
-                            f"LLM call failed (attempt {attempt}/{_RETRIES + 1}): {exc} - retrying",
+                            f"LLM call failed (attempt {attempt}/{_RETRIES + 1}): {exc} — retrying",
                             level="warn")
     raise RuntimeError(f"LLM provider unavailable ({config.PROVIDER_NAME or 'unset'}): {last_err}")
 

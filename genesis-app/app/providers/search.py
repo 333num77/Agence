@@ -1,4 +1,4 @@
-"""Search provider: tavily | searxng | mock - env-switchable, no vendor lock.
+"""Search provider: tavily | searxng | mock — env-switchable, no vendor lock.
 
 Contract (frozen): query -> [{title, url, content}]
 SearXNG prerequisite: instance must allow JSON format (settings.yml -> formats: [html, json])."""
@@ -43,7 +43,7 @@ def _tavily(query: str) -> list[dict]:
 
 
 def _searxng(query: str) -> list[dict]:
-    """Self-hosted SearXNG JSON API - free, private, zero vendor lock."""
+    """Self-hosted SearXNG JSON API — free, private, zero vendor lock."""
     r = httpx.get(f"{config.SEARXNG_BASE}/search",
                   params={"q": query, "format": "json"},
                   headers={"Accept": "application/json", **_auth_header()},
@@ -57,10 +57,10 @@ def _searxng(query: str) -> list[dict]:
 
 
 _MOCK_SITES = [
-    ("reddit.com", "r/SaaS discussion: \"{kw}\" - what people actually complain about"),
-    ("g2.com", "Reviews roundup for tools matching \"{kw}\" - ratings and complaints"),
+    ("reddit.com", "r/SaaS discussion: \"{kw}\" — what people actually complain about"),
+    ("g2.com", "Reviews roundup for tools matching \"{kw}\" — ratings and complaints"),
     ("techcrunch.com", "Funding and launches in the \"{kw}\" space"),
-    ("producthunt.com", "\"{kw}\" tool launch thread - early adopter feedback"),
+    ("producthunt.com", "\"{kw}\" tool launch thread — early adopter feedback"),
     ("medium.com", "Founder post-mortem: building a \"{kw}\" product"),
     ("stripe.com", "Pricing benchmarks for \"{kw}\" SaaS tools"),
 ]

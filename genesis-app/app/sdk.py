@@ -1,4 +1,4 @@
-"""Genesis SDK - use the validation engine from Python, two ways:
+"""Genesis SDK — use the validation engine from Python, two ways:
 
 1. In-process (no server needed):
     from app.sdk import Genesis
@@ -16,9 +16,9 @@ Event contract (every on_event dict):
  agent: orchestrator|researcher|analyst|critic|diagnostics,
  level: info|action|success|warn|error, message: str, detail?: dict}
 
-Typed errors (app.errors): GenesisError � GenesisUsageError � JobNotFound �
-JobNotFinished � JobFailed (resumable) � ConfigError � ProviderError �
-TransportError � GenesisTimeout (job keeps running, resumable)."""
+Typed errors (app.errors): GenesisError · GenesisUsageError · JobNotFound ·
+JobNotFinished · JobFailed (resumable) · ConfigError · ProviderError ·
+TransportError · GenesisTimeout (job keeps running, resumable)."""
 from __future__ import annotations
 
 import json

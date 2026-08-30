@@ -37,7 +37,7 @@ def emit_diagnostics(job_id: str) -> dict:
     ]
     if all(core_ok):
         events.emit(job_id, "intake", "diagnostics",
-                    f"System check passed - mode: {config.MODE.upper()}, "
+                    f"System check passed — mode: {config.MODE.upper()}, "
                     f"llm: {config.PROVIDER_NAME or 'unset'}, search: {config.SEARCH_PROVIDER}",
                     level="success", detail=status)
     else:
@@ -49,7 +49,7 @@ def emit_diagnostics(job_id: str) -> dict:
         if not core_ok[2]:
             bad.append("db")
         events.emit(job_id, "intake", "diagnostics",
-                    f"Degraded components: {', '.join(bad)} - pipeline will retry and clearly report failures",
+                    f"Degraded components: {', '.join(bad)} — pipeline will retry and clearly report failures",
                     level="warn", detail=status)
     return status
 
@@ -69,6 +69,6 @@ def with_retry(job_id: str, stage: str, agent: str, label: str, fn, retries: int
                 raise
             wait = backoff * attempt
             events.emit(job_id, stage, agent,
-                        f"{label} failed (attempt {attempt}/{retries + 1}): {exc} - retrying in {wait:.1f}s",
+                        f"{label} failed (attempt {attempt}/{retries + 1}): {exc} — retrying in {wait:.1f}s",
                         level="warn")
             time.sleep(wait)

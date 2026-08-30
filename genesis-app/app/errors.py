@@ -1,6 +1,6 @@
-"""Genesis error taxonomy - shared by SDK, CLI and API (international contract).
+"""Genesis error taxonomy — shared by SDK, CLI and API (international contract).
 
-Mapping: HTTP 404 -> JobNotFound � 409 -> JobNotFinished � 400 -> GenesisUsageError �
+Mapping: HTTP 404 -> JobNotFound · 409 -> JobNotFinished · 400 -> GenesisUsageError ·
 5xx/connection -> TransportError. In-process provider failures -> ProviderError."""
 
 

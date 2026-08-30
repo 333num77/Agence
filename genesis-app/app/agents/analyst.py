@@ -17,7 +17,7 @@ class Analyst(Agent):
             events.emit(job_id, stage, self.name, msg, level, detail)
 
         compact = ev.compact_for_prompt(evidence)
-        emit(f"Analyzing {len(compact)} evidence items.", level="action")
+        emit(f"Analyzing {len(compact)} evidence items…", level="action")
 
         user_msg = (
             f"{self.user_context()}\n\nIDEA:\n{idea}\n\n"
@@ -33,5 +33,5 @@ class Analyst(Agent):
         comp = out.get("competition") or {}
         comp["evidence_ids"] = [i for i in (comp.get("evidence_ids") or []) if i in valid_ids]
 
-        emit("Analysis complete - claims are evidence-backed", level="success")
+        emit("Analysis complete — claims are evidence-backed", level="success")
         return out
