@@ -1,5 +1,5 @@
 @echo off
-rem Genesis - one-click start: server + browser
+rem Genesis — one-click start: server + browser
 cd /d "%~dp0"
 echo Starting Genesis server...
 start "Genesis Server" cmd /c "python run.py"

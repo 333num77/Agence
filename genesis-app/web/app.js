@@ -5,7 +5,7 @@ const STAGES = ["intake", "research", "analysis", "critique", "verdict"];
 let currentJob = null;
 let es = null;
 
-/* ?? boot ?? */
+/* ── boot ── */
 init();
 async function init() {
   if (location.protocol === "file:") { showOffline(); return; }
@@ -37,15 +37,15 @@ async function loadMode() {
     $("mode-badge").classList.toggle("live", h.mode === "live");
     const ok = Object.values(h).every(v => typeof v !== "object" || v.ok);
     $("health-dot").classList.toggle("ok", ok);
-    $("health-dot").title = ok ? "All systems ok" : "Degraded - check /api/health";
+    $("health-dot").title = ok ? "All systems ok" : "Degraded — check /api/health";
     if (h.stt && h.stt.enabled === false) { $("mic-btn").style.display = "none"; }
     else { $("mic-btn").title = `Speak your idea (${(h.stt && h.stt.provider) || "STT"})`; }
-  } catch { /* server unreachable - show offline banner */
+  } catch { /* server unreachable — show offline banner */
     showOffline();
   }
 }
 
-/* ?? run validation ?? */
+/* ── run validation ── */
 async function runValidation() {
   const idea = $("idea").value.trim();
   const hint = $("input-hint");
@@ -106,7 +106,7 @@ function addEvent(evt) {
   feed.scrollTop = feed.scrollHeight;
 }
 
-/* ?? result rendering ?? */
+/* ── result rendering ── */
 async function showResult(jobId) {
   const r = await api("/result/" + jobId);
   const box = $("result");
@@ -140,14 +140,14 @@ async function showFailed(jobId) {
     $("feed-card").classList.remove("hidden");
     const div = document.createElement("div");
     div.className = "evt error";
-    div.innerHTML = `<span class="agent">system</span><span class="msg">Job failed: ${esc(job.error || "unknown")} - <button class="btn ghost" onclick="resumeJob('${jobId}')">Resume from checkpoint</button></span>`;
+    div.innerHTML = `<span class="agent">system</span><span class="msg">Job failed: ${esc(job.error || "unknown")} — <button class="btn ghost" onclick="resumeJob('${jobId}')">Resume from checkpoint</button></span>`;
     $("feed").appendChild(div);
   } catch (e) { toast(e.message); }
 }
 
 async function resumeJob(jobId) { try { await api(`/jobs/${jobId}/resume`, { method: "POST" }); openJob(jobId); } catch (e) { toast(e.message); } }
 
-/* ?? history ?? */
+/* ── history ── */
 async function loadHistory() {
   try {
     const jobs = await api("/jobs");
@@ -178,7 +178,7 @@ async function openJobView(jobId) {
   } catch (e) { toast(e.message); }
 }
 
-/* ?? profile harness ?? */
+/* ── profile harness ── */
 let profileOpen = false;
 async function openProfile() {
   const p = await api("/profile");
@@ -193,7 +193,7 @@ async function openProfile() {
   $("profile-drawer").classList.remove("hidden");
 }
 
-/* ?? prompt editor ?? */
+/* ── prompt editor ── */
 let prompts = {}, activePrompt = null;
 async function openPrompts() {
   prompts = await api("/prompts");
@@ -214,7 +214,7 @@ function selectPrompt(name, btn) {
   document.querySelectorAll("#prompt-tabs button").forEach(b => b.classList.toggle("on", b === btn));
 }
 
-/* ?? STT mic ?? */
+/* ── STT mic ── */
 let mediaRecorder = null, chunks = [];
 async function toggleMic() {
   const btn = $("mic-btn");
@@ -230,7 +230,7 @@ async function toggleMic() {
     mediaRecorder.onstop = async () => {
       stream.getTracks().forEach(t => t.stop());
       btn.textContent = "MIC"; btn.classList.remove("rec");
-      btn.disabled = true; btn.textContent = ".";
+      btn.disabled = true; btn.textContent = "…";
       try {
         const blob = new Blob(chunks, { type: "audio/webm" });
         const fd = new FormData();
@@ -239,7 +239,7 @@ async function toggleMic() {
         if (!r.ok) throw new Error((await r.json()).detail || "STT failed");
         const { text } = await r.json();
         $("idea").value = ($("idea").value ? $("idea").value + " " : "") + text;
-        toast("Transcribed - review kar ke run karo");
+        toast("Transcribed — review kar ke run karo");
       } catch (e) { toast(e.message); }
       btn.disabled = false; btn.textContent = "MIC";
     };
@@ -248,7 +248,7 @@ async function toggleMic() {
   } catch (e) { toast("Mic access failed: " + e.message); }
 }
 
-/* ?? utils ?? */
+/* ── utils ── */
 let toastTimer;
 function toast(msg) {
   const t = $("toast");
@@ -273,7 +273,7 @@ function wireEvents() {
     try {
       await api(`/prompts/${activePrompt}`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ content: $("prompt-editor").value }) });
       prompts[activePrompt] = $("prompt-editor").value;
-      toast("Prompt saved - next run applies it");
+      toast("Prompt saved — next run applies it");
     } catch (e) { toast(e.message); }
   };
   document.querySelectorAll(".drawer .close").forEach(b => b.onclick = (e) => e.target.closest(".drawer").classList.add("hidden"));

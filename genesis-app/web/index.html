@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Genesis - Idea Validation Engine</title>
+<title>Genesis — Idea Validation Engine</title>
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 <div id="offline-banner" class="offline hidden">
-  <b>Server band hai.</b> Ye page sirf UI hai - isko chalane ke liye: <code>cd genesis</code> phir <code>python run.py</code>, aur browser mein <b>http://127.0.0.1:8787</b> kholo. (Double-click option: <code>start.bat</code>)
+  <b>Server band hai.</b> Ye page sirf UI hai — isko chalane ke liye: <code>cd genesis</code> phir <code>python run.py</code>, aur browser mein <b>http://127.0.0.1:8787</b> kholo. (Double-click option: <code>start.bat</code>)
 </div>
 <header class="top">
   <div class="brand">GENESIS<span class="sub">idea validation engine</span></div>
   <div class="top-status">
-    <span id="mode-badge" class="badge">.</span>
+    <span id="mode-badge" class="badge">…</span>
     <span id="health-dot" class="dot" title="system health"></span>
   </div>
 </header>
@@ -22,7 +22,7 @@
   <aside class="side">
     <section class="card">
       <h2>New validation</h2>
-      <textarea id="idea" rows="5" placeholder="Apna idea likho ya bol kar record karo.&#10;e.g. AI tool that turns messy startup ideas into evidence-backed validation reports"></textarea>
+      <textarea id="idea" rows="5" placeholder="Apna idea likho ya bol kar record karo…&#10;e.g. AI tool that turns messy startup ideas into evidence-backed validation reports"></textarea>
       <div class="row">
         <button id="mic-btn" class="btn ghost" title="Speak your idea">MIC</button>
         <button id="run-btn" class="btn primary">Run validation</button>
@@ -32,7 +32,7 @@
 
     <section class="card">
       <h2>History</h2>
-      <ul id="history" class="history"><li class="muted">Loading.</li></ul>
+      <ul id="history" class="history"><li class="muted">Loading…</li></ul>
     </section>
 
     <section class="card row-btns">
@@ -62,23 +62,23 @@
       <p>Apna idea left panel mein likho (ya bol kar batao). Genesis research karega,
       asli web evidence jama karega, idea ko red-team karega, aur phir
       <strong>VALIDATE / FIX_FIRST / REJECT</strong> ka evidence-backed verdict dega.</p>
-      <p class="muted">Har step live yahan stream hoga - kaunsa agent kya kar raha hai.</p>
+      <p class="muted">Har step live yahan stream hoga — kaunsa agent kya kar raha hai.</p>
     </section>
   </section>
 </main>
 
 <!-- Profile drawer -->
 <div id="profile-drawer" class="drawer hidden">
-  <div class="drawer-head"><h2>Profile harness</h2><button class="btn ghost close">�</button></div>
-  <p class="muted small">Ye context har agent ko inject hoti hai - naye idea par apne bare mein dobara batane ki zaroorat nahi.</p>
+  <div class="drawer-head"><h2>Profile harness</h2><button class="btn ghost close">×</button></div>
+  <p class="muted small">Ye context har agent ko inject hoti hai — naye idea par apne bare mein dobara batane ki zaroorat nahi.</p>
   <div id="profile-form" class="form"></div>
   <button id="save-profile" class="btn primary">Save profile</button>
 </div>
 
 <!-- Prompts drawer -->
 <div id="prompts-drawer" class="drawer hidden">
-  <div class="drawer-head"><h2>Agent prompts (editable)</h2><button class="btn ghost close">�</button></div>
-  <p class="muted small">Changes next run se apply hote hain - restart ki zaroorat nahi.</p>
+  <div class="drawer-head"><h2>Agent prompts (editable)</h2><button class="btn ghost close">×</button></div>
+  <p class="muted small">Changes next run se apply hote hain — restart ki zaroorat nahi.</p>
   <div id="prompt-tabs" class="tabs"></div>
   <textarea id="prompt-editor" rows="18" spellcheck="false"></textarea>
   <button id="save-prompt" class="btn primary">Save prompt</button>

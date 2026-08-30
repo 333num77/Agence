@@ -1,4 +1,4 @@
-/* Genesis UI - dark, fast, zero dependencies */
+/* Genesis UI — dark, fast, zero dependencies */
 :root {
   --bg: #0d0f12; --surface: #15181d; --surface2: #1b1f26; --line: #262b33;
   --ink: #e8eaed; --muted: #9aa3af; --accent: #4ade80; --accent2: #38bdf8;
@@ -76,7 +76,7 @@ textarea:focus, .form input:focus { outline: none; border-color: var(--accent2);
 .evt.success .msg { color: var(--accent); }
 .evt.warn .msg { color: var(--warn); }
 .evt.error .msg { color: var(--err); }
-.evt.action .msg::before { content: "? "; }
+.evt.action .msg::before { content: "▸ "; }
 
 .result-banner { border-radius: 10px; padding: 16px 18px; margin-bottom: 14px;
   display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; }
